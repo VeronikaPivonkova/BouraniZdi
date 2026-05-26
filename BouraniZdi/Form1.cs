@@ -16,6 +16,9 @@ namespace BouraniZdi
 
         Graphics mobjGrafika;
 
+        // kulička
+        clsKulicka mobjKulicka;
+
         //hodnoty kuličky
         int mintSouradniceX, mintSouradniceY;
         int mintPosunX, mintPosunY;
@@ -37,6 +40,9 @@ namespace BouraniZdi
         {
             // připojení grafiky na picturebox
             mobjGrafika = pbPlatno.CreateGraphics();
+
+            // vytvořit kuličku
+            mobjKulicka = new clsKulicka();
 
             // nastavit kuličku
             mintSouradniceX = mintSouradniceY = 100;
@@ -65,6 +71,9 @@ namespace BouraniZdi
 
         private void tmrVykreslení_Tick(object sender, EventArgs e)
         {
+            // nakresli kuličku
+            mobjKulicka.NakresliSe();
+
             //smazání kuličky
             mobjGrafika.FillEllipse(Brushes.White, mintSouradniceX, mintSouradniceY, cnVelikost, cnVelikost);
 

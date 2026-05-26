@@ -8,5 +8,19 @@ namespace BouraniZdi
 {
     internal class clsKulicka
     {
+        //-----------------------------------
+        // konstruktor
+        //-----------------------------------
+
+        public clsKulicka()
+        {
+        }
+
+        //-----------------------------------
+        // nakreslení kuličky
+        //-----------------------------------
+        public void NakresliSe()
+        {
+        }
     }
 }
