@@ -42,7 +42,6 @@
             this.pbPlatno.Size = new System.Drawing.Size(771, 445);
             this.pbPlatno.TabIndex = 0;
             this.pbPlatno.TabStop = false;
-            this.pbPlatno.Click += new System.EventHandler(this.pbPlatno_Click);
             // 
             // tmrVykreslení
             // 

@@ -19,10 +19,10 @@ namespace BouraniZdi
         // kulička
         clsKulicka mobjKulicka;
 
-        //hodnoty kuličky
-        int mintSouradniceX, mintSouradniceY;
-        int mintPosunX, mintPosunY;
-        const int cnVelikost = 20;
+        // balonek
+        clsBalonek [] mobjBalonek;
+        const int cnPocetBalonku = 15;
+
 
 
         //------------------------------------------------
@@ -38,30 +38,38 @@ namespace BouraniZdi
         //------------------------------------------------
         private void Form1_Load(object sender, EventArgs e)
         {
+            int lintX, lintY;
             // připojení grafiky na picturebox
             mobjGrafika = pbPlatno.CreateGraphics();
 
             // vytvořit kuličku
-            mobjKulicka = new clsKulicka();
+            mobjKulicka = new clsKulicka(mobjGrafika, 100, 100);
 
-            // nastavit kuličku
-            mintSouradniceX = mintSouradniceY = 100;
-            mintPosunX = mintPosunY = 3;
+            // vytvořit indexované pole
+            mobjBalonek = new clsBalonek[cnPocetBalonku];
 
+            // vytvořit balonky
+            lintX = lintY = 10;
+            for (int i = 0; i < cnPocetBalonku; i++)
+            { 
+                // vytvořit balonek
+                mobjBalonek[i] = new clsBalonek(mobjGrafika, lintX, lintY);
+
+                // posunout x
+                lintX = lintX + 60;
+
+                // test zda nejsem za okrajem
+                if (lintX+60 > pbPlatno. Width)
+                {
+                    lintX = 10;
+                    lintY = lintY + 60;
+                }
+            }
             // nastartovat timer
             tmrVykreslení.Interval = 20;
             tmrVykreslení.Start();
         }
 
-
-
-        
-
-
-        private void pbPlatno_Click(object sender, EventArgs e)
-        {
-            
-        }
 
 
 
@@ -74,23 +82,11 @@ namespace BouraniZdi
             // nakresli kuličku
             mobjKulicka.NakresliSe();
 
-            //smazání kuličky
-            mobjGrafika.FillEllipse(Brushes.White, mintSouradniceX, mintSouradniceY, cnVelikost, cnVelikost);
-
-            //posun kuličky
-            mintSouradniceX = mintSouradniceX + mintPosunX;
-            mintSouradniceY = mintSouradniceY + mintPosunY;
-
-            // odraz v Y
-            if ((mintSouradniceY + cnVelikost > pbPlatno.Height) || (mintSouradniceY < 0))
-                mintPosunY = mintPosunY * (-1);
-
-            // odraz v X
-            if ((mintSouradniceX + cnVelikost > pbPlatno.Width) || (mintSouradniceX < 0))
-                mintPosunX = mintPosunX * (-1);
-
-            // nakreslení kuličky
-            mobjGrafika.FillEllipse(Brushes.Blue, mintSouradniceX, mintSouradniceY, cnVelikost, cnVelikost);
+            // nakresli balonky
+            for (int i = 0; i < cnPocetBalonku; i++)
+            {
+                mobjBalonek[i].NakresliSe();
+            }
         }
     }
 }
